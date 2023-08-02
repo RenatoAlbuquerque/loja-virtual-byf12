@@ -20,7 +20,6 @@ export const withAuth = (Page: React.FC, UserPermission: string[]) => {
     useEffect(() => {
       const { get: getLocalStorage } = userStorage.userInfo()
       const token = getLocalStorage()?.token
-      console.log('chamou')
       if (token) {
         const { roles } = decodeToken(token)
 

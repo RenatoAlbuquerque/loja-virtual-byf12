@@ -10,7 +10,7 @@ export const DemoCarousel = () => {
   return (
     <Box width="100%" my={4} borderTop="3px solid black" borderBottom="3px solid black">
       <Carousel
-        // autoPlay
+        autoPlay
         centerMode
         showArrows={false}
         showIndicators={false}
@@ -18,7 +18,7 @@ export const DemoCarousel = () => {
         showStatus={false}
         emulateTouch={false}
         interval={3000}
-        // infiniteLoop
+        infiniteLoop
         centerSlidePercentage={40}
       >
         {imageCarousel.map((item: any) => (

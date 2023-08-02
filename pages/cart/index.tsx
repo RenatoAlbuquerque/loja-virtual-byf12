@@ -1,19 +1,17 @@
 import React, { Fragment, useState } from 'react';
 import Navbar from '@/components/Molecules/Navbar';
-import GridProducts from '@/components/features/home/GridProducts';
-import { DemoCarousel } from '@/components/features/home/Carousel';
+import CartTemplate from '@/components/features/cart';
 import { ProductInfo } from 'local-storage/types';
 
-const Home = () => {
+const Cart = () => {
   const [cartList, setCartList] = useState<ProductInfo[]>([])
 
   return (
     <Fragment>
       <Navbar cartList={cartList} setCartList={setCartList} />
-      <DemoCarousel />
-      <GridProducts setCartList={setCartList} />
+      <CartTemplate />
     </Fragment>
   );
 }
 
-export default Home
+export default Cart

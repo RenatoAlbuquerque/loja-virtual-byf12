@@ -1,21 +1,21 @@
 import {
   LocalStorageMethodReturn,
-  ProductInfo,
-  CartInfoKey,
+  SaleInfo,
+  SaleInfoKey,
   ProductsList
 } from '../types'
 
-function cartInfo(): LocalStorageMethodReturn<ProductInfo> {
-  const key: CartInfoKey = 'cart-info'
+function saleInfo(): LocalStorageMethodReturn<SaleInfo> {
+  const key: SaleInfoKey = 'sale-info'
   const get = () => {
     const data = localStorage.getItem(key)
     if (data) {
       return JSON.parse(data) as ProductsList[]
     }
-    return []
+    return null
   }
 
-  const set = (value: ProductsList[]) => {
+  const set = (value: SaleInfo) => {
     localStorage.setItem(key, JSON.stringify(value))
   }
 
@@ -31,5 +31,5 @@ function cartInfo(): LocalStorageMethodReturn<ProductInfo> {
 }
 
 export default {
-  cartInfo: cartInfo
+  saleInfo: saleInfo
 }

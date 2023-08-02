@@ -1,5 +1,5 @@
-import React, { useContext, Fragment, useState } from 'react'
-import { Box, Typography } from '@mui/material';
+import React, { useContext, useEffect } from 'react'
+import { Box } from '@mui/material';
 import { styled } from '@mui/system'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,6 +10,8 @@ import Badge from '@/components/Atoms/Badge';
 import ModalLogin from '../ModalLogin';
 import Button from '@/components/Atoms/Button';
 import { ProductInfo } from 'local-storage/types';
+import cartStorage from 'local-storage/cartStorage';
+import NavAdmin from './navAdmin';
 
 const NavbarComponent = styled('div')({
   display: 'flex',
@@ -34,34 +36,33 @@ const navLinksUser = [
   {
     label: 'home',
     path: '/'
-  },
-  {
-    label: 'Novo Post',
-    path: '/createpost'
-  },
-  {
-    label: 'Dashboard',
-    path: '/dashboard'
-  },
-  {
-    label: 'sobre',
-    path: '/about'
-  },
+  }
 ]
 
 interface INavbarProps {
   cartList?: ProductInfo[]
+  setCartList: (arg: ProductInfo[]) => void
 }
 
-const Navbar = ({ cartList }: INavbarProps) => {
-  const { user }: any = useContext(UserContext);
-  const [openModallogin, setOpenModalLogin] = useState<boolean>(false)
+const Navbar = ({ cartList, setCartList }: INavbarProps) => {
+  const { openModallogin, setOpenModalLogin, user }: any = useContext(UserContext);
+  const { get: getCartStorage } = cartStorage.cartInfo()
+  const router = useRouter()
+
+  useEffect(() => {
+    const fetch = async () => {
+      const cartStorageVal = await getCartStorage()
+      setCartList(cartStorageVal)
+    }
+    fetch()
+  }, [])
+
 
   const renderNavbarItens = () => {
     if (!user) {
-      return navLinksUser
-    } else {
       return navLinksPublic
+    } else {
+      return navLinksUser
     }
   }
 
@@ -71,10 +72,18 @@ const Navbar = ({ cartList }: INavbarProps) => {
     }
   }
 
+  const goForHome = () => {
+    if (router.pathname !== '/') {
+      router.push('/')
+    }
+  }
+
   return (
     <NavbarComponent>
       <Box display="flex" alignItems="center" fontWeight="600" pl={2}>
-        <Image src={logoEshoes} width={50} height={40} alt="imagem de tenis preto e branco" priority />
+        <Button id="btn-logo-eshoes" onClick={goForHome} variant='text'>
+          <Image src={logoEshoes} width={50} height={40} alt="imagem de tenis preto e branco" />
+        </Button>
       </Box>
       <Box display="flex" gap="20px">
         {renderNavbarItens().map((item) => (
@@ -88,17 +97,24 @@ const Navbar = ({ cartList }: INavbarProps) => {
             </Button>
           </Link>
         ))}
-        <Button
-          id="btn-open-modal-login"
-          variant="text"
-          onClick={handleModallogin}
-          color="secondary"
-        >
-          Login
-        </Button>
+        {!user && (
+          <Button
+            id="btn-open-modal-login"
+            variant="text"
+            onClick={handleModallogin}
+            color="secondary"
+          >
+            Login
+          </Button>
+        )}
       </Box>
-      <Box display="flex" alignItems="center" fontWeight="600" pr={2}>
-        <Badge cartList={cartList} />
+      <Box display="flex">
+        {user && (
+          <NavAdmin />
+        )}
+        <Box display="flex" alignItems="center" fontWeight="600" pr={2}>
+          <Badge cartList={cartList} />
+        </Box>
       </Box>
       <ModalLogin open={openModallogin} setOpen={setOpenModalLogin} />
     </NavbarComponent>

@@ -23,12 +23,12 @@ const BadgeCustomize = ({ cartList }: IBadgeCustomizeProps) => {
   const router = useRouter();
 
   const cartPage = () => {
-    router.push('/dashboard')
+    router.push('/cart')
   }
 
   return (
     <IconButton aria-label="cart" onClick={cartPage}>
-      <StyledBadge badgeContent={cartList ? cartList?.length : null} color="secondary">
+      <StyledBadge badgeContent={cartList && router.pathname === '/' ? cartList?.length : null} color="secondary">
         <ShoppingCartIcon fontSize='large' />
       </StyledBadge>
     </IconButton>

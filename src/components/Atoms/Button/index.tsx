@@ -57,7 +57,6 @@ export default function Button({
       startIcon={startIcon}
       endIcon={endIcon}
       id={id}
-      data-testId={testId}
     >
       {children}
     </ButtonMui>

@@ -14,6 +14,7 @@ export interface UserInfo {
 export type ProductInfoKey = 'product-info'
 
 export interface ProductInfo {
+  quantidadeSelecionada?: string
   imagemUrl: string
   nome: string
   preco: number
@@ -26,3 +27,12 @@ export interface ProductsList {
 }
 
 export type CartInfoKey = 'cart-info'
+
+export type SaleInfoKey = 'sale-info'
+
+export interface SaleInfo {
+  date: string
+  valorTotal: string
+  summaryCart: ProductInfo[]
+  map: (arq: any) => unknown
+}

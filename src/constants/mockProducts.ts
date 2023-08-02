@@ -5,13 +5,13 @@ export const mockProducts: ProductInfo[] = [
     imagemUrl: 'https://images.pexels.com/photos/2404959/pexels-photo-2404959.png?auto=compress&cs=tinysrgb&w=1600',
     nome: 'Zoom Vapor Cage',
     preco: 199.99,
-    quantidade: 10,
+    quantidade: 30,
   },
   {
     imagemUrl: 'https://images.pexels.com/photos/11292946/pexels-photo-11292946.jpeg?auto=compress&cs=tinysrgb&w=1600',
     nome: 'Air Max System',
     preco: 99.99,
-    quantidade: 5,
+    quantidade: 30,
   },
   {
     imagemUrl: 'https://images.pexels.com/photos/1461048/pexels-photo-1461048.jpeg?auto=compress&cs=tinysrgb&w=1600',

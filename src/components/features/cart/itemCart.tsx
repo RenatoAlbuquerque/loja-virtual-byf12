@@ -1,27 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@/components/Atoms/Button'
-import { Typography, FormControl, MenuItem } from '@mui/material'
 import Box, { BoxProps } from '@mui/material/Box';
+import { Typography, FormControl, MenuItem } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { ProductInfo, ProductsList } from 'local-storage/types';
 import { formatMoney } from '@/utils/formatMoney';
 import cartStorage from 'local-storage/cartStorage';
 import { styled } from '@mui/material/styles';
 
-
-
 interface IItemCartProps {
   item: ProductInfo
   setItensCart: (arg: ProductsList) => void
+  setSummaryCart: any
 }
 
-
-
-const ItemCart = ({ item, setItensCart }: IItemCartProps) => {
-  const [qtdItem, setQtdItem] = React.useState('1');
+const ItemCart = ({ item, setItensCart, setSummaryCart }: IItemCartProps) => {
+  const [qtdItem, setQtdItem] = useState('1');
   const { set: setLocalStorage, get: getLocalStorage } = cartStorage.cartInfo();
 
-  const ImageItemCart = styled(Box)<BoxProps>(({ }) => ({
+  const ImageItemCart = styled(Box)<BoxProps>(() => ({
     backgroundImage: `url(${item.imagemUrl})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -32,8 +29,8 @@ const ItemCart = ({ item, setItensCart }: IItemCartProps) => {
     border: '2px solid #000'
   }));
 
-  const removeSingleItemFromCart = () => {
-    const cartData = getLocalStorage();
+  const removeSingleItemFromCart = async () => {
+    const cartData = await getLocalStorage();
 
     const itemIndex = cartData.findIndex((cartItem: ProductInfo) => cartItem.nome === item.nome);
 
@@ -44,6 +41,26 @@ const ItemCart = ({ item, setItensCart }: IItemCartProps) => {
       setItensCart(cartData)
     }
   }
+
+  useEffect(() => {
+    const storageVal = getLocalStorage()
+    const itemToModify = storageVal.find((cartItem: ProductInfo) => cartItem.nome === item.nome);
+
+    if (itemToModify) {
+
+      const modifiedItem = { ...itemToModify, quantidadeSelecionada: Number(qtdItem) };
+      const modifiedCartData = storageVal.map((cartItem: ProductInfo) => {
+        if (cartItem.nome === item.nome) {
+          return modifiedItem;
+        } else {
+          return cartItem;
+        }
+      });
+
+      setLocalStorage(modifiedCartData);
+      setSummaryCart(modifiedCartData);
+    }
+  }, [qtdItem])
 
   const handleChange = (event: SelectChangeEvent) => {
     setQtdItem(event.target.value);
@@ -110,7 +127,9 @@ const ItemCart = ({ item, setItensCart }: IItemCartProps) => {
             <MenuItem value={5}>5</MenuItem>
           </Select>
         </FormControl>
-        <Typography textAlign="end" variant="h6" id="total-item-price">{formatMoney(totalPriceItem())}</Typography>
+        <Typography textAlign="end" variant="h6" id="total-item-price">
+          {formatMoney(totalPriceItem())}
+        </Typography>
       </Box>
     </Box>
   )

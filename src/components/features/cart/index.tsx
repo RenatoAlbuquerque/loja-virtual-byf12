@@ -1,21 +1,23 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography } from '@mui/material'
 import ItemCart from './itemCart'
 import cartStorage from 'local-storage/cartStorage'
 import { ProductInfo, ProductsList } from 'local-storage/types'
 import { styled } from '@mui/material/styles';
 import Box, { BoxProps } from '@mui/material/Box';
+import SummaryPurchase from './summaryPurchase'
 
-const StyledBoxPaper = styled(Box)<BoxProps>(({ theme }) => ({
+const StyledBoxPaper = styled(Box)<BoxProps>(() => ({
   display: 'flex',
   width: "100%",
   borderTop: '10px solid #181818',
   borderBottom: '10px solid #181818',
 }));
 
-const DashboardTemplate = () => {
+const CartTemplate = () => {
   const { get: getLocalStorage } = cartStorage.cartInfo();
   const [itensCart, setItensCart] = useState<ProductsList>()
+  const [summaryCart, setSummaryCart] = useState<ProductInfo>()
 
   useEffect(() => {
     async function fetchDataCart() {
@@ -48,21 +50,13 @@ const DashboardTemplate = () => {
             <Typography variant="h4">Carrinho</Typography>
           </Box>
           {itensCart?.map((item: ProductInfo) => (
-            <ItemCart item={item} key={item.nome} setItensCart={setItensCart} />
+            <ItemCart item={item} key={item.nome} setItensCart={setItensCart} setSummaryCart={setSummaryCart} />
           ))}
         </>
       </Box>
-      <Box
-        id="div-resume-buy"
-        display="flex"
-        width="40%"
-        style={{ backgroundColor: '#F3F4F6', color: '#181818' }}
-        p={3}
-      >
-        <Typography variant="h4">Resumo das compras</Typography>
-      </Box>
+      <SummaryPurchase summaryCart={summaryCart} itensCart={itensCart} />
     </StyledBoxPaper >
   )
 }
 
-export default DashboardTemplate
+export default CartTemplate

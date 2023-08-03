@@ -70,16 +70,17 @@ function AdicionarProduto({ fetchProducts }: IAdicionarProdutoProps) {
 
   return (
     <Box width="100%" display="flex" justifyContent="center" alignItems="center" flexDirection="column" gap="30px">
-      <Box style={{
-        backgroundColor: 'gray',
-        backgroundImage: urlImage ? ` url(${urlImage})` : '',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        width: '250px',
-        height: '250px',
-        borderRadius: '4px',
-
-      }} />
+      <Box
+        id="preview-image-product"
+        style={{
+          backgroundColor: 'gray',
+          backgroundImage: urlImage ? ` url(${urlImage})` : '',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          width: '250px',
+          height: '250px',
+          borderRadius: '4px',
+        }} />
 
       <Box
         maxWidth="500px"

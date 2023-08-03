@@ -30,7 +30,7 @@ const GridProducts = ({ setCartList }: IGridProductsProps) => {
   }, [])
 
   return (
-    <Grid container px={1} width="100%" mt={2}>
+    <Grid container px={1} width="100%" mt={2} id="grid-products">
       {productsList?.map((item: ProductInfo) => (
         <CardItemList item={item} key={item.nome} setCartList={setCartList} />
       ))}

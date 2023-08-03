@@ -15,6 +15,7 @@ export const DemoCarousel = () => {
       borderTop="3px solid black"
       borderBottom="3px solid black"
       display={isMD ? 'none' : 'block'}
+      id="carousel-img"
     >
       <Carousel
         autoPlay

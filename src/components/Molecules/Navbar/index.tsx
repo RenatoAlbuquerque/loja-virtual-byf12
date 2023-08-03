@@ -81,7 +81,7 @@ const Navbar = ({ cartList, setCartList }: INavbarProps) => {
   }
 
   return (
-    <NavbarComponent>
+    <NavbarComponent id="navbar-component">
       <Box display="flex" alignItems="center" fontWeight="600" pl={isXS ? 0 : 2} >
         <Button id="btn-logo-eshoes" onClick={goForHome} variant='text'>
           <Image src={logoEshoes} width={50} height={40} alt="imagem de tenis preto e branco" />
@@ -106,7 +106,7 @@ const Navbar = ({ cartList, setCartList }: INavbarProps) => {
             onClick={handleModallogin}
             color="secondary"
           >
-            Login
+            login
           </Button>
         )}
       </Box>
@@ -114,7 +114,7 @@ const Navbar = ({ cartList, setCartList }: INavbarProps) => {
         {user && (
           <NavAdmin />
         )}
-        <Box display="flex" alignItems="center" fontWeight="600" pr={2}>
+        <Box display="flex" alignItems="center" fontWeight="600" pr={2} id="badge-cart">
           <Badge cartList={cartList} />
         </Box>
       </Box>

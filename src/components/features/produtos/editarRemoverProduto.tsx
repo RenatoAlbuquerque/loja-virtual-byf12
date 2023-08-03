@@ -165,6 +165,7 @@ function EditarProduto({ item, setProductsList }: IEditarProdutoProps) {
           fullWidth
           color="secondary"
           onChange={(e) => setNameProduct(e.target.value)}
+          id="name-edit-product"
         />
       </Box>
       <Box
@@ -197,10 +198,10 @@ function EditarProduto({ item, setProductsList }: IEditarProdutoProps) {
         />
       </Box>
       <Box display="flex" flexDirection="column" justifyContent="flex-end" alignItems="center" gap="30px">
-        <Button id="btn-add-product" color="secondary" fullWidth onClick={editProduct} startIcon={<EditOutlinedIcon />}>
+        <Button id="btn-edit-product" color="secondary" fullWidth onClick={editProduct} startIcon={<EditOutlinedIcon />}>
           Editar Produto
         </Button>
-        <Button id="btn-add-product" color="error" fullWidth onClick={removeProduct} endIcon={<DeleteForeverOutlinedIcon />}>
+        <Button id="btn-remove-product" color="error" fullWidth onClick={removeProduct} endIcon={<DeleteForeverOutlinedIcon />}>
           Remover Produto
         </Button>
       </Box>

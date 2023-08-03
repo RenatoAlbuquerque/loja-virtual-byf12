@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Tabs, Tab, Typography } from '@mui/material';
 import AdicionarProduto from './adicionarProduto';
-import EditarProduto from './editarProduto';
+import EditarProduto from './editarRemoverProduto';
 import productsStorage from 'local-storage/productsStorage';
 import { ProductInfo } from 'local-storage/types';
 

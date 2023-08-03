@@ -16,38 +16,38 @@ const SaleOrder = ({ saleInfo }: ISaleOrderProps) => {
   );
 
   return (
-    <Accordion style={{ paddingLeft: isSM ? '10px' : '20px', paddingRight: isSM ? '10px' : '20px' }}>
+    <Accordion style={{ paddingLeft: isSM ? '10px' : '20px', paddingRight: isSM ? '10px' : '20px' }} id="accordion-sale-order">
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
-        id="panel1a-header"
+        id="btn-expand-accordion"
       >
         <Box mr={isSM ? 2 : 4}>
-          <Typography variant='subtitle1'>Data</Typography>
-          <Typography>{saleInfo.date}</Typography>
+          <Typography variant='subtitle1' id="order-date-label">Data</Typography>
+          <Typography id="order-date-value">{saleInfo.date}</Typography>
         </Box>
         <Box mr={isSM ? 2 : 4}>
-          <Typography variant='subtitle1'>Quantidade de itens</Typography>
-          <Typography>{qtdSelectedTotal}</Typography>
+          <Typography variant='subtitle1' id="order-qtd-itens-label">Quantidade de itens</Typography>
+          <Typography id="order-qtd-itens-value">{qtdSelectedTotal}</Typography>
         </Box>
         <Box mr={isSM ? 2 : 4}>
-          <Typography variant='subtitle1'>Valor Total da compra</Typography>
-          <Typography>{saleInfo.valorTotal}</Typography>
+          <Typography variant='subtitle1' id="order-total-purchase-label" >Valor Total da compra</Typography>
+          <Typography id="order-total-purchase-value">{saleInfo.valorTotal}</Typography>
         </Box>
       </AccordionSummary>
       <AccordionDetails>
         <Grid container display="flex" alignItems="center" justifyContent="space-between" mb={1} >
           <Grid item xs={3}>
-            <Typography color="info" variant="body2">Produto</Typography>
+            <Typography color="info" variant="body2" id="product-label">Produto</Typography>
           </Grid>
           <Grid item xs={4}>
-            <Typography color="info" variant="body2">Nome</Typography>
+            <Typography color="info" variant="body2" id="product-name">Nome</Typography>
           </Grid>
           <Grid item xs={3}>
-            <Typography color="info" variant="body2">Preço Unitário</Typography>
+            <Typography color="info" variant="body2" id="product-price">Preço Unitário</Typography>
           </Grid>
           <Grid item xs={2}>
-            <Typography color="info" variant="body2">Quantidade</Typography>
+            <Typography color="info" variant="body2" id="product-qtd">Quantidade</Typography>
           </Grid>
         </Grid>
         {saleInfo.summaryCart.map((cartInfo) => (

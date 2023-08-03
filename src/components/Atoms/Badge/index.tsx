@@ -28,7 +28,7 @@ const BadgeCustomize = ({ cartList }: IBadgeCustomizeProps) => {
 
   return (
     <IconButton aria-label="cart" onClick={cartPage}>
-      <StyledBadge badgeContent={cartList && router.pathname === '/' ? cartList?.length : null} color="secondary">
+      <StyledBadge badgeContent={cartList && router.pathname === '/' ? cartList?.length : null} color="secondary" id="btn-badge">
         <ShoppingCartIcon fontSize='large' />
       </StyledBadge>
     </IconButton>

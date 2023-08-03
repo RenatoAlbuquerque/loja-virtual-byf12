@@ -83,7 +83,7 @@ const CardItemList = ({ item, setCartList }: ICardItemListProps) => {
 
   return (
     <Grid item container xs={12} sm={6} md={4} lg={3} xl={2} width="100%" display="flex" alignItems="center" mb={3}>
-      <Box width="100%" display="flex" flexDirection="column" alignItems="center">
+      <Box width="100%" display="flex" flexDirection="column" alignItems="center" id="card-product">
         <Box >
           <ImageProductItem
             mb={1}
@@ -96,7 +96,7 @@ const CardItemList = ({ item, setCartList }: ICardItemListProps) => {
                   Adicionar ao carrinho
                 </Button>
               </Box>
-              <Box width="100%" display="flex" justifyContent="flex-end" mr={2} mb={1}>
+              <Box width="100%" display="flex" justifyContent="flex-end" mr={2} mb={1} id="qtd-available">
                 <Typography variant="subtitle2" color="secondary">
                   {item.quantidade} Unidades Disponíveis
                 </Typography>
@@ -104,7 +104,7 @@ const CardItemList = ({ item, setCartList }: ICardItemListProps) => {
             </LayerProductItem>
           </ImageProductItem>
           <Box width="100%" display="flex" justifyContent="flex-start" flexDirection="column">
-            <Typography variant='body1'>{item.nome}</Typography>
+            <Typography variant='body1' id="name-product">{item.nome}</Typography>
             <Typography variant='body1'>{formatMoney(item.preco)}</Typography>
           </Box>
         </Box>

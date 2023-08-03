@@ -20,7 +20,7 @@ const VendasTemplate = () => {
   return (
     <Box width="100%" mt={2} p={isSM ? 0 : 4}>
       <Box ml={isSM ? 2 : 0}>
-        <Typography variant='h4'>Relatório de Vendas</Typography>
+        <Typography variant='h4' id="title-summary-sales">Relatório de Vendas</Typography>
       </Box>
       <Box
         my={2}
@@ -28,7 +28,7 @@ const VendasTemplate = () => {
         justifyContent="center"
         flexDirection="column"
       >
-        {salesSummary.length > 0 && salesSummary.map((saleInfo: SaleInfo) => (
+        {salesSummary?.map((saleInfo: SaleInfo) => (
           <SaleOrder saleInfo={saleInfo} key={saleInfo.date} />
         ))}
       </Box>

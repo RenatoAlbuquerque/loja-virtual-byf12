@@ -39,6 +39,7 @@ const NavAdmin = () => {
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
+            id="icon-btn-painel-admin"
           >
             <Avatar sx={{ width: 30, height: 30 }}><Person /></Avatar>
           </IconButton>
@@ -79,19 +80,19 @@ const NavAdmin = () => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem onClick={() => router.push('/produtos')}>
+        <MenuItem onClick={() => router.push('/produtos')} id="menu-products">
           <ListItemIcon>
             <AddBusiness fontSize="medium" />
           </ListItemIcon>
           Produtos
         </MenuItem>
-        <MenuItem onClick={() => router.push('/vendas')}>
+        <MenuItem onClick={() => router.push('/vendas')} id="menu-summary-sales">
           <ListItemIcon>
             <Receipt fontSize="medium" />
           </ListItemIcon>
           Relatório de vendas
         </MenuItem>
-        <MenuItem onClick={LogoutUser}>
+        <MenuItem onClick={LogoutUser} id="btn-logout">
           <ListItemIcon>
             <Logout fontSize="medium" />
           </ListItemIcon>

@@ -14,7 +14,7 @@
 
 A loja virtual E-Shoes faz parte do processo seletivo para Desenvolvedor Front-End na etapa de teste técnico.
 Proposta do projeto: Desenvolva um painel administrativo para uma loja virtual. O painel deve permitir que o administrador visualize informações sobre os produtos, gerencie o inventário e veja as vendas.
-Projeto composto apenas por Frontend, utilizando o LocalStorage para simular um banco de dados.
+Projeto composto apenas por Frontend, utilizando Nextjs e para estilização Material UI, além do LocalStorage para simular um banco de dados.
 
 ---
 
@@ -133,6 +133,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 #### **Principais bibliotecas utilizadas** ([Next](https://nextjs.org/))
 
+- **[Material UI](https://mui.com/)**
 - **[Moment](https://momentjs.com/)**
 - **[React-Responsive-Carousel](https://www.npmjs.com/package/react-responsive-carousel)**
 - **[React-toastify](https://fkhadra.github.io/react-toastify/introduction)**

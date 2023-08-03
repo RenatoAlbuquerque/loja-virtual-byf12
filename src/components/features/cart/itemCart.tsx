@@ -120,6 +120,7 @@ const ItemCart = ({ item, setItensCart, itensCart, setTotal }: IItemCartProps) =
             <MenuItem value={5}>5</MenuItem>
           </Select>
         </FormControl>
+        <Typography>{item.quantidade} Unidades disponíveis</Typography>
         <Typography textAlign="end" variant="h6" id="total-item-price">
           {formatMoney(totalPriceItem())}
         </Typography>

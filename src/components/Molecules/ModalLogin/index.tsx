@@ -33,7 +33,11 @@ const ModalLogin = ({ open, setOpen }: IModalLoginProps) => {
   }
 
   const login = () => {
-    if (email !== 'admin@teste.com' && password !== 'teste') {
+    if (email === 'admin@teste.com' && password === 'teste') {
+      setUserStorage({ email: 'admin@teste.com', password: 'teste' })
+      setUser({ email: 'admin@teste.com', password: 'teste' })
+      handleClose()
+    } else {
       return toast.error('Credenciais inválidas!', {
         position: "top-right",
         autoClose: 5000,
@@ -45,9 +49,6 @@ const ModalLogin = ({ open, setOpen }: IModalLoginProps) => {
         theme: "dark",
       });
     }
-    setUserStorage({ email: 'admin@teste.com', password: 'teste' })
-    setUser({ email: 'admin@teste.com', password: 'teste' })
-    handleClose()
   }
 
   return (

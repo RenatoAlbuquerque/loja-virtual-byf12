@@ -40,14 +40,17 @@ const SaleOrder = ({ saleInfo }: ISaleOrderProps) => {
           <Grid item xs={3}>
             <Typography color="info" variant="body2" id="product-label">Produto</Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <Typography color="info" variant="body2" id="product-name">Nome</Typography>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Typography color="info" variant="body2" id="product-price">Preço Unitário</Typography>
           </Grid>
           <Grid item xs={2}>
             <Typography color="info" variant="body2" id="product-qtd">Quantidade</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography color="info" variant="body2" id="value-total">Valor Total</Typography>
           </Grid>
         </Grid>
         {saleInfo.summaryCart.map((cartInfo) => (
@@ -72,14 +75,19 @@ const SaleOrder = ({ saleInfo }: ISaleOrderProps) => {
                 height: '100px',
               }} />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <Typography>{cartInfo.nome}</Typography>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <Typography>{formatMoney(cartInfo.preco)}</Typography>
             </Grid>
             <Grid item xs={2}>
               <Typography>{cartInfo.quantidadeSelecionada}</Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Typography>
+                {formatMoney(cartInfo.preco * Number(cartInfo.quantidadeSelecionada))}
+              </Typography>
             </Grid>
           </Grid>
         ))}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, TextField, InputAdornment } from '@mui/material'
+import { Box, TextField, InputAdornment, useMediaQuery } from '@mui/material'
 import Button from '@/components/Atoms/Button'
 import { toast } from 'react-toastify';
 import productsStorage from 'local-storage/productsStorage';
@@ -18,7 +18,7 @@ function EditarProduto({ item, setProductsList }: IEditarProdutoProps) {
   const [priceProduct, setPriceProduct] = useState<string | number>(item.preco)
   const [qtdProduct, setQtdProduct] = useState<string | number>(item.quantidade)
   const { get: getProductStorage, set: setProductStorage } = productsStorage.productInfo()
-
+  const isSM = useMediaQuery('(max-width:680px)');
   const formatPrice = (price: any) => {
     if (typeof price !== 'string' || !price.includes(',')) {
       return price;
@@ -126,6 +126,7 @@ function EditarProduto({ item, setProductsList }: IEditarProdutoProps) {
       mb={2}
       width="100%"
       display="flex"
+      flexDirection={isSM ? 'column' : 'row'}
       justifyContent="space-around"
       alignItems="center"
       gap="30px"
@@ -138,8 +139,8 @@ function EditarProduto({ item, setProductsList }: IEditarProdutoProps) {
         backgroundImage: urlImage ? ` url(${urlImage})` : '',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        width: '120px',
-        height: '120px',
+        width: isSM ? '220px' : '120px',
+        height: isSM ? '220px' : '120px',
         borderRadius: '4px',
       }} />
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/system'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,18 +12,6 @@ import Button from '@/components/Atoms/Button';
 import { ProductInfo } from 'local-storage/types';
 import cartStorage from 'local-storage/cartStorage';
 import NavAdmin from './navAdmin';
-
-const NavbarComponent = styled('div')({
-  display: 'flex',
-  boxShadow: 'rgba(0,0,0, .15) 0px -2px 10px 0px',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '.5em 2em',
-  fontFamily: 'roboto',
-  height: '60px',
-  background: '#F9FAFB',
-  textDecoration: 'none'
-});
 
 const navLinksPublic = [
   {
@@ -48,6 +36,20 @@ const Navbar = ({ cartList, setCartList }: INavbarProps) => {
   const { openModallogin, setOpenModalLogin, user }: any = useContext(UserContext);
   const { get: getCartStorage } = cartStorage.cartInfo()
   const router = useRouter()
+  const isXS = useMediaQuery('(max-width:320px)');
+
+  const NavbarComponent = styled('div')({
+    display: 'flex',
+    boxShadow: 'rgba(0,0,0, .15) 0px -2px 10px 0px',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: isXS ? '.5em  0px' : '.5em 2em',
+    fontFamily: 'roboto',
+    height: '60px',
+    background: '#F9FAFB',
+    textDecoration: 'none'
+  });
+
 
   useEffect(() => {
     const fetch = async () => {
@@ -80,7 +82,7 @@ const Navbar = ({ cartList, setCartList }: INavbarProps) => {
 
   return (
     <NavbarComponent>
-      <Box display="flex" alignItems="center" fontWeight="600" pl={2}>
+      <Box display="flex" alignItems="center" fontWeight="600" pl={isXS ? 0 : 2} >
         <Button id="btn-logo-eshoes" onClick={goForHome} variant='text'>
           <Image src={logoEshoes} width={50} height={40} alt="imagem de tenis preto e branco" />
         </Button>

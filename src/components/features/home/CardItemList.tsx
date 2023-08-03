@@ -65,9 +65,9 @@ const CardItemList = ({ item, setCartList }: ICardItemListProps) => {
         });
         const updatedCart = [...storageVal, item];
         setLocalStorage(updatedCart);
-        setCartList(updatedCart)
+        return setCartList(updatedCart)
       } else {
-        toast.error('O Item já se encontra no carrinho!', {
+        return toast.error('O Item já se encontra no carrinho!', {
           position: "top-right",
           autoClose: 4000,
           hideProgressBar: false,

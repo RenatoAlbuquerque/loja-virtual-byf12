@@ -1,6 +1,6 @@
 import React from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
+import { Box, Grid, Accordion, AccordionDetails, AccordionSummary, Typography, useMediaQuery } from '@mui/material';
 import { SaleInfo } from 'local-storage/types';
 import { formatMoney } from '@/utils/formatMoney';
 
@@ -9,28 +9,28 @@ interface ISaleOrderProps {
 }
 
 const SaleOrder = ({ saleInfo }: ISaleOrderProps) => {
-
+  const isSM = useMediaQuery('(max-width:680px)');
   const qtdSelectedTotal = saleInfo.summaryCart.reduce(
     (total: any, item) => total + item.quantidadeSelecionada,
     0
   );
 
   return (
-    <Accordion style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+    <Accordion style={{ paddingLeft: isSM ? '10px' : '20px', paddingRight: isSM ? '10px' : '20px' }}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Box mr={4}>
+        <Box mr={isSM ? 2 : 4}>
           <Typography variant='subtitle1'>Data</Typography>
           <Typography>{saleInfo.date}</Typography>
         </Box>
-        <Box mr={4}>
+        <Box mr={isSM ? 2 : 4}>
           <Typography variant='subtitle1'>Quantidade de itens</Typography>
           <Typography>{qtdSelectedTotal}</Typography>
         </Box>
-        <Box mr={4}>
+        <Box mr={isSM ? 2 : 4}>
           <Typography variant='subtitle1'>Valor Total da compra</Typography>
           <Typography>{saleInfo.valorTotal}</Typography>
         </Box>
@@ -83,7 +83,6 @@ const SaleOrder = ({ saleInfo }: ISaleOrderProps) => {
             </Grid>
           </Grid>
         ))}
-
       </AccordionDetails>
     </Accordion>
   );

@@ -3,12 +3,19 @@ import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import { imageCarousel } from '@/constants/mockImageCrousel';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 
 export const DemoCarousel = () => {
+  const isMD = useMediaQuery('(max-width:640px)');
 
   return (
-    <Box width="100%" my={4} borderTop="3px solid black" borderBottom="3px solid black">
+    <Box
+      width="100%"
+      my={4}
+      borderTop="3px solid black"
+      borderBottom="3px solid black"
+      display={isMD ? 'none' : 'block'}
+    >
       <Carousel
         autoPlay
         centerMode

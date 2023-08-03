@@ -1,9 +1,15 @@
 import React from 'react';
 import Home from './home';
+import Head from 'next/head';
 
-function Index() {
+const Index = () => {
   return (
-    <Home />
+    <>
+      <Head>
+        <title>Loja Virtual By-F12</title>
+      </Head>
+      <Home />
+    </>
   );
 }
 

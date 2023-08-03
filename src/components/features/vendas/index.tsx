@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useMediaQuery } from '@mui/material'
 import { SaleInfo } from 'local-storage/types'
 import SaleOrder from './SaleOrder'
 import saleStorage from 'local-storage/saleStorage'
@@ -7,6 +7,7 @@ import saleStorage from 'local-storage/saleStorage'
 const VendasTemplate = () => {
   const { get: getSaleStorage } = saleStorage.saleInfo()
   const [salesSummary, setSalesSummary] = useState([])
+  const isSM = useMediaQuery('(max-width:680px)');
 
   useEffect(() => {
     const fetchSale = async () => {
@@ -17,8 +18,8 @@ const VendasTemplate = () => {
   }, [])
 
   return (
-    <Box width="100%" mt={2} p={4}>
-      <Box>
+    <Box width="100%" mt={2} p={isSM ? 0 : 4}>
+      <Box ml={isSM ? 2 : 0}>
         <Typography variant='h4'>Relatório de Vendas</Typography>
       </Box>
       <Box

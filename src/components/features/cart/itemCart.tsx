@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Button from '@/components/Atoms/Button'
 import Box, { BoxProps } from '@mui/material/Box';
 import { Typography, FormControl, MenuItem } from '@mui/material'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { ProductInfo, ProductsList } from 'local-storage/types';
+import { ProductInfo } from 'local-storage/types';
 import { formatMoney } from '@/utils/formatMoney';
 import cartStorage from 'local-storage/cartStorage';
 import { styled } from '@mui/material/styles';
 
 interface IItemCartProps {
   item: ProductInfo
-  setItensCart: (arg: ProductsList) => void
-  setSummaryCart: any
+  setItensCart: (arg: ProductInfo[]) => void
+  itensCart: ProductInfo[] | []
+  setTotal: (arg: number) => void
 }
 
-const ItemCart = ({ item, setItensCart, setSummaryCart }: IItemCartProps) => {
-  const [qtdItem, setQtdItem] = useState('1');
-  const { set: setLocalStorage, get: getLocalStorage } = cartStorage.cartInfo();
-
+const ItemCart = ({ item, setItensCart, itensCart, setTotal }: IItemCartProps) => {
+  const [qtdItem, setQtdItem] = useState(item.quantidadeSelecionada);
+  const { set: setCartStorage, get: getCartStorage } = cartStorage.cartInfo();
   const ImageItemCart = styled(Box)<BoxProps>(() => ({
     backgroundImage: `url(${item.imagemUrl})`,
     backgroundSize: 'cover',
@@ -30,40 +30,33 @@ const ItemCart = ({ item, setItensCart, setSummaryCart }: IItemCartProps) => {
   }));
 
   const removeSingleItemFromCart = async () => {
-    const cartData = await getLocalStorage();
+    const updatedCart = itensCart.filter((itemCart: ProductInfo) => itemCart.nome !== item.nome);
+    setItensCart(updatedCart);
+    setCartStorage(updatedCart);
 
-    const itemIndex = cartData.findIndex((cartItem: ProductInfo) => cartItem.nome === item.nome);
-
-    if (itemIndex !== -1) {
-      cartData.splice(itemIndex, 1);
-
-      setLocalStorage(cartData)
-      setItensCart(cartData)
-    }
+    const totalSum = updatedCart.reduce((acc: any, item: any) => acc + item.preco * item.quantidadeSelecionada, 0);
+    setTotal(totalSum)
   }
 
-  useEffect(() => {
-    const storageVal = getLocalStorage()
-    const itemToModify = storageVal.find((cartItem: ProductInfo) => cartItem.nome === item.nome);
-
-    if (itemToModify) {
-
-      const modifiedItem = { ...itemToModify, quantidadeSelecionada: Number(qtdItem) };
-      const modifiedCartData = storageVal.map((cartItem: ProductInfo) => {
-        if (cartItem.nome === item.nome) {
-          return modifiedItem;
-        } else {
-          return cartItem;
-        }
-      });
-
-      setLocalStorage(modifiedCartData);
-      setSummaryCart(modifiedCartData);
-    }
-  }, [qtdItem])
-
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = async (event: SelectChangeEvent) => {
     setQtdItem(event.target.value);
+
+    const cartItens = await getCartStorage();
+
+    const itemExist = cartItens.find((itemProduct: ProductInfo) => itemProduct.nome === item.nome)
+
+    if (itemExist) {
+      const itemIndex = cartItens.findIndex((itemProduct: ProductInfo) => itemProduct.nome === item.nome);
+
+      const updatedCartItens = [...cartItens];
+      updatedCartItens[itemIndex].quantidadeSelecionada = event.target.value;
+
+      setItensCart(updatedCartItens);
+      setCartStorage(updatedCartItens);
+
+      const totalSum = cartItens.reduce((acc: any, item: any) => acc + item.preco * item.quantidadeSelecionada, 0);
+      setTotal(totalSum)
+    }
   };
 
   const totalPriceItem = () => {

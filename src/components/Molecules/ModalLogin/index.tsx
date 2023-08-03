@@ -50,10 +50,9 @@ const ModalLogin = ({ open, setOpen }: IModalLoginProps) => {
     handleClose()
   }
 
-
   return (
     <Dialog open={open} onClose={handleClose}>
-      <Box p={4} width="400px">
+      <Box p={4} maxWidth="400px">
         <Grid container>
           <Grid item xs={12} display="flex" mb={2} justifyContent="space-between" alignItems="center">
             <Typography variant='h5' fontWeight={500}>Acesse a sua conta!</Typography>

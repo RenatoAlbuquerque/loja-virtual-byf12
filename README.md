@@ -96,6 +96,8 @@ Para a padronização, melhores práticas e a legibilidade do código, foi intro
 
 
 ---
+##### ✔️ Todas as imagens utilizadas nos produtos são da plataforma [Pexels](https://www.pexels.com/pt-br/), e podem ser utilizadas publicamente para fins educativos.
+---
 
 ## 🚀 Como executar o projeto
 ### Pré-requisitos
